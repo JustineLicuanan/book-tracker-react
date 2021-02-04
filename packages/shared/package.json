@@ -1,0 +1,26 @@
+{
+	"name": "@react-tasks/shared",
+	"version": "0.1.0",
+	"main": "dist/index",
+	"scripts": {
+		"up": "npx npm-check-updates -u",
+		"dev:build": "yarn build -w",
+		"build": "yarn rm:dist && tsc",
+		"rm:dist": "rm -rf dist"
+	},
+	"author": "Justine Licuanan",
+	"license": "MIT",
+	"typings": "dist/index.d.ts",
+	"files": [
+		"dist",
+		"src"
+	],
+	"devDependencies": {
+		"@types/node": "^14.14.22",
+		"typescript": "^4.1.3",
+		"yup": "^0.32.8"
+	},
+	"peerDependencies": {
+		"yup": "^0.32.8"
+	}
+}

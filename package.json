@@ -1,0 +1,33 @@
+{
+	"name": "react-tasks",
+	"scripts": {
+		"cwd:shared": "yarn --cwd ./packages/shared",
+		"cwd:web": "yarn --cwd ./packages/web",
+		"cwd:server": "yarn --cwd ./packages/server",
+		"add:shared": "yarn cwd:shared add",
+		"add:web": "yarn cwd:web add",
+		"add:server": "yarn cwd:server add",
+		"dev:shared": "yarn cwd:shared dev:build",
+		"dev:web": "yarn cwd:web start",
+		"dev:server": "yarn cwd:server dev",
+		"commit": "git add . && git commit -m",
+		"origin": "git push origin master",
+		"build:shared": "yarn cwd:shared build",
+		"build:web": "yarn cwd:web build",
+		"build:server": "yarn cwd:server build",
+		"heroku-postbuild": "yarn build:shared && yarn build:web && yarn build:server",
+		"heroku": "git push heroku master",
+		"start": "yarn --cwd ./packages/server start"
+	},
+	"author": "Justine Licuanan",
+	"license": "MIT",
+	"engines": {
+		"node": "14.15.1"
+	},
+	"private": true,
+	"workspaces": {
+		"packages": [
+			"packages/*"
+		]
+	}
+}
