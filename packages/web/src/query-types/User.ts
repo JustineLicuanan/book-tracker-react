@@ -1,7 +1,7 @@
-import { Task } from './Task';
+import { Book } from './Book';
 
 export interface User {
 	id?: string;
 	email?: string;
-	tasks?: Task[];
+	books?: Book[];
 }

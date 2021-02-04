@@ -1,6 +1,6 @@
 export { loginSchema, registerSchema } from './yup-schemas/AuthSchema';
 export {
-	addTaskSchema,
-	updateTaskSchema,
-	deleteTaskSchema,
-} from './yup-schemas/TaskSchema';
+	addBookSchema,
+	updateBookSchema,
+	deleteBookSchema,
+} from './yup-schemas/BookSchema';

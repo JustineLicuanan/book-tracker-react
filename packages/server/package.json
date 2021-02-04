@@ -1,5 +1,5 @@
 {
-	"name": "@react-tasks/server",
+	"name": "@book-tracker/server",
 	"version": "0.1.0",
 	"license": "MIT",
 	"devDependencies": {
@@ -14,7 +14,7 @@
 		"typescript": "4.1.3"
 	},
 	"dependencies": {
-		"@react-tasks/shared": "^0.1.0",
+		"@book-tracker/shared": "^0.1.0",
 		"apollo-server-express": "^2.19.2",
 		"bcryptjs": "^2.4.3",
 		"better-sqlite3": "^7.1.2",

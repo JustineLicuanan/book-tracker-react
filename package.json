@@ -1,5 +1,5 @@
 {
-	"name": "react-tasks",
+	"name": "book-tracker-react",
 	"scripts": {
 		"cwd:shared": "yarn --cwd ./packages/shared",
 		"cwd:web": "yarn --cwd ./packages/web",

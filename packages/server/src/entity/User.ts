@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import { Field, ObjectType } from 'type-graphql';
 
 import { ExtendedBaseEntity } from './Base';
-import { Task } from './Task';
+import { Book } from './Book';
 
 @Entity('users')
 @ObjectType()
@@ -15,9 +15,9 @@ export class User extends ExtendedBaseEntity {
 	@Column('text')
 	password: string;
 
-	@OneToMany(() => Task, (task) => task.user)
-	@Field(() => [Task])
-	tasks: Task[];
+	@OneToMany(() => Book, (book) => book.user)
+	@Field(() => [Book])
+	books: Book[];
 
 	@BeforeInsert()
 	async hashPass() {

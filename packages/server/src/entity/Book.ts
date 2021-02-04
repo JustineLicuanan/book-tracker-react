@@ -6,7 +6,7 @@ import { User } from './User';
 
 @Entity()
 @ObjectType()
-export class Task extends ExtendedBaseEntity {
+export class Book extends ExtendedBaseEntity {
 	@Column('text')
 	@Field()
 	title: string;
@@ -15,6 +15,6 @@ export class Task extends ExtendedBaseEntity {
 	@Field()
 	completed: boolean = false;
 
-	@ManyToOne(() => User, (user) => user.tasks)
+	@ManyToOne(() => User, (user) => user.books)
 	user: User;
 }

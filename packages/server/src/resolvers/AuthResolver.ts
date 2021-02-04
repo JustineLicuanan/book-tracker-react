@@ -1,4 +1,4 @@
-import { loginSchema, registerSchema } from '@react-tasks/shared';
+import { loginSchema, registerSchema } from '@book-tracker/shared';
 import {
 	Arg,
 	Ctx,
@@ -36,7 +36,7 @@ export class AuthResolver {
 		}
 
 		const user = await User.create(input).save();
-		user.tasks = [];
+		user.books = [];
 
 		(req.session as any).user = user;
 		return { user };
@@ -50,7 +50,7 @@ export class AuthResolver {
 	): Promise<ResolverTypes.LoginObject> {
 		const user = await User.findOne(
 			{ email: input.email },
-			{ relations: ['tasks'] }
+			{ relations: ['books'] }
 		);
 
 		const errors = [

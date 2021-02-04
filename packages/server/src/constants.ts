@@ -1,3 +1,1 @@
-const { NODE_ENV = 'development' } = process.env;
-
-export const __PROD__ = NODE_ENV === 'production';
+export const __PROD__ = process.env.NODE_ENV === 'production';

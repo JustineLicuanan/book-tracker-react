@@ -1,19 +1,19 @@
 import { ObjectType, Field, InputType } from 'type-graphql';
 
-import { Task } from '../entity/Task';
+import { Book } from '../entity/Book';
 import { FieldError } from './FieldError';
 
 @ObjectType()
-export class AddTaskObject {
+export class AddBookObject {
 	@Field({ nullable: true })
-	task?: Task;
+	book?: Book;
 
 	@Field(() => [FieldError], { nullable: true })
 	errors?: FieldError[];
 }
 
 @InputType()
-export class UpdateTaskInput {
+export class UpdateBookInput {
 	@Field()
 	id: string;
 
@@ -25,7 +25,7 @@ export class UpdateTaskInput {
 }
 
 @ObjectType()
-export class DeleteTaskObject {
+export class DeleteBookObject {
 	@Field({ nullable: true })
 	success?: boolean;
 

@@ -7,7 +7,7 @@ import { createConnection, getConnectionOptions } from 'typeorm';
 const SQLiteStore = require('connect-sqlite3')(session);
 
 import { AuthResolver } from './resolvers/AuthResolver';
-import { TaskResolver } from './resolvers/TaskResolver';
+import { BookResolver } from './resolvers/BookResolver';
 import { __PROD__ } from './constants';
 
 (async () => {
@@ -45,7 +45,7 @@ import { __PROD__ } from './constants';
 
 	const apolloServer = new ApolloServer({
 		schema: await buildSchema({
-			resolvers: [AuthResolver, TaskResolver],
+			resolvers: [AuthResolver, BookResolver],
 			validate: false,
 		}),
 		context: ({ req, res }) => ({ req, res }),

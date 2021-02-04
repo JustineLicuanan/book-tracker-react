@@ -5,9 +5,9 @@ export const queryKeys = {
 	ME: { key: 'meQuery' },
 	LOGOUT: { key: 'logoutMutation' },
 
-	// Task CRUD
-	ADD_TASK: { key: 'addTaskMutation' },
-	GET_ALL_TASKS: { key: 'getAllTasksQuery' },
-	UPDATE_TASK: { key: 'updateTaskMutation' },
-	DELETE_TASK: { key: 'deleteTaskMutation' },
+	// Book CRUD
+	ADD_BOOK: { key: 'addBookMutation' },
+	GET_ALL_BOOKS: { key: 'getAllBooksQuery' },
+	UPDATE_BOOK: { key: 'updateBookMutation' },
+	DELETE_BOOK: { key: 'deleteBookMutation' },
 };
