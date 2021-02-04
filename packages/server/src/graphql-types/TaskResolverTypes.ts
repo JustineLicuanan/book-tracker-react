@@ -1,4 +1,4 @@
-import { ObjectType, Field } from 'type-graphql';
+import { ObjectType, Field, InputType } from 'type-graphql';
 
 import { Task } from '../entity/Task';
 import { FieldError } from './FieldError';
@@ -10,6 +10,18 @@ export class AddTaskObject {
 
 	@Field(() => [FieldError], { nullable: true })
 	errors?: FieldError[];
+}
+
+@InputType()
+export class UpdateTaskInput {
+	@Field()
+	id: string;
+
+	@Field()
+	title: string;
+
+	@Field()
+	completed: boolean;
 }
 
 @ObjectType()

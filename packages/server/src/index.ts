@@ -4,12 +4,11 @@ import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
 import session from 'express-session';
 import { createConnection, getConnectionOptions } from 'typeorm';
-import { TypeormStore } from 'connect-typeorm';
+const SQLiteStore = require('connect-sqlite3')(session);
 
 import { AuthResolver } from './resolvers/AuthResolver';
 import { TaskResolver } from './resolvers/TaskResolver';
 import { __PROD__ } from './constants';
-import { Session } from './entity/Session';
 
 (async () => {
 	const {
@@ -19,18 +18,12 @@ import { Session } from './entity/Session';
 	} = process.env;
 	const app = express();
 
-	const options = await getConnectionOptions(NODE_ENV);
-	const connection = await createConnection({ ...options, name: 'default' });
-	const sessionRepo = connection.getRepository(Session);
-
-	console.log('Connected to database successfully');
-
 	app.use(
 		session({
-			store: new TypeormStore({
-				cleanupLimit: 2,
-				ttl: 86400,
-			}).connect(sessionRepo),
+			store: new SQLiteStore({
+				db: 'database.sqlite',
+				concurrentDB: true,
+			}),
 			name: 'qid',
 			secret: SESSION_SECRET,
 			resave: false,
@@ -44,6 +37,11 @@ import { Session } from './entity/Session';
 		})
 	);
 	app.use(express.static('../../client/build'));
+
+	const options = await getConnectionOptions(NODE_ENV);
+	await createConnection({ ...options, name: 'default' });
+
+	console.log('Connected to database successfully');
 
 	const apolloServer = new ApolloServer({
 		schema: await buildSchema({

@@ -1,4 +1,8 @@
-import { addTaskSchema, deleteTaskSchema } from '@react-tasks/shared';
+import {
+	addTaskSchema,
+	deleteTaskSchema,
+	updateTaskSchema,
+} from '@react-tasks/shared';
 import {
 	Arg,
 	Ctx,
@@ -38,6 +42,40 @@ export class TaskResolver {
 	async getAllTasks(@Ctx() { req }: MyContext): Promise<Task[]> {
 		const { tasks } = (req.session as any).user as User;
 		return tasks;
+	}
+
+	@Mutation(() => ResolverTypes.DeleteTaskObject)
+	@UseMiddleware(isAuth, isValid(updateTaskSchema))
+	async updateTask(
+		@Arg('input') { id, ...input }: ResolverTypes.UpdateTaskInput,
+		@Ctx() { req }: MyContext
+	): Promise<ResolverTypes.DeleteTaskObject> {
+		let taskUpdated = false;
+		const tasks = ((req.session as any).user as User).tasks.map((task) => {
+			if (task.id === id) {
+				task.title = input.title;
+				task.completed = input.completed;
+				taskUpdated = true;
+			}
+
+			return task;
+		});
+
+		if (!taskUpdated) {
+			const errors = [
+				{
+					path: 'task',
+					message: 'task not found',
+				},
+			];
+
+			return { errors };
+		}
+
+		const { affected } = await Task.update(id, input);
+
+		(req.session as any).user.tasks = tasks;
+		return { success: !!affected };
 	}
 
 	@Mutation(() => ResolverTypes.DeleteTaskObject)
