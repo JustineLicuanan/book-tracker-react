@@ -1,1 +1,1 @@
-web: node packages/server/dist/index
+web: yarn start
