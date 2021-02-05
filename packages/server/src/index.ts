@@ -36,7 +36,7 @@ import { __PROD__ } from './constants';
 			},
 		})
 	);
-	app.use(express.static('../../client/build'));
+	app.use(express.static('../../web/build'));
 
 	const options = await getConnectionOptions(NODE_ENV);
 	await createConnection({ ...options, name: 'default' });
