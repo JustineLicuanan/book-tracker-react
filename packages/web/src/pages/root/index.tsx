@@ -1,3 +1,4 @@
+import { Box, Typography } from '@material-ui/core';
 import { useEffect } from 'react';
 
 import { myMeta } from '../../meta';
@@ -8,9 +9,16 @@ const DashboardPage = () => {
 	});
 
 	return (
-		<>
-			<h1>This is the DASHBOARD page</h1>
-		</>
+		<Box my={8}>
+			<Typography variant='h4' align='center'>
+				DASHBOARD Page
+				<br />
+				<br />
+				This page is under CONSTRUCTION.
+				<br />
+				Work in Progress (WiP)
+			</Typography>
+		</Box>
 	);
 };
 

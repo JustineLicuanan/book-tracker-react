@@ -10,11 +10,13 @@ import { gql } from 'graphql-request';
 import { routes } from './constants/routes';
 import { queryKeys } from './constants/queryKeys';
 import { client } from './client';
-import { User } from './query-types/User';
+import { UserWithError } from './query-types/User';
 import LoginPage from './pages/login';
 import RegisterPage from './pages/register';
 import DashboardPage from './pages/root';
 import LogoutPage from './pages/LogoutPage';
+import NavBar from './components/NavBar';
+import Copyright from './components/Copyright';
 
 const App = () => {
 	const meQuery = useQuery(queryKeys.ME.key, async () => {
@@ -22,18 +24,25 @@ const App = () => {
 			{
 				me {
 					id
+					email
+					books {
+						id
+						title
+						completed
+					}
 				}
 			}
 		`);
 
-		return me as User | null;
+		return { user: me } as UserWithError;
 	});
 
 	return (
 		<Router>
+			<NavBar />
 			<Switch>
 				<Route path={routes.dashboard.path} exact>
-					{meQuery.data ? (
+					{meQuery.data?.user ? (
 						<DashboardPage />
 					) : (
 						<Redirect to={routes.login.path} />
@@ -41,7 +50,7 @@ const App = () => {
 				</Route>
 
 				<Route path={routes.register.path} exact>
-					{!meQuery.data ? (
+					{!meQuery.data?.user ? (
 						<RegisterPage />
 					) : (
 						<Redirect to={routes.dashboard.path} />
@@ -49,7 +58,7 @@ const App = () => {
 				</Route>
 
 				<Route path={routes.login.path} exact>
-					{!meQuery.data ? (
+					{!meQuery.data?.user ? (
 						<LoginPage />
 					) : (
 						<Redirect to={routes.dashboard.path} />
@@ -60,6 +69,7 @@ const App = () => {
 					<LogoutPage />
 				</Route>
 			</Switch>
+			<Copyright />
 		</Router>
 	);
 };

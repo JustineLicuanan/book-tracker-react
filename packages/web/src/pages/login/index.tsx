@@ -1,6 +1,8 @@
+import { Container } from '@material-ui/core';
 import { useEffect } from 'react';
 
 import { myMeta } from '../../meta';
+import LoginForm from './components/LoginForm';
 
 const LoginPage = () => {
 	useEffect(() => {
@@ -8,9 +10,9 @@ const LoginPage = () => {
 	});
 
 	return (
-		<>
-			<h1>This is the LOGIN page</h1>
-		</>
+		<Container>
+			<LoginForm />
+		</Container>
 	);
 };
 

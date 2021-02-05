@@ -1,6 +1,8 @@
+import { Container } from '@material-ui/core';
 import { useEffect } from 'react';
 
 import { myMeta } from '../../meta';
+import RegisterForm from './components/RegisterForm';
 
 const RegisterPage = () => {
 	useEffect(() => {
@@ -8,9 +10,9 @@ const RegisterPage = () => {
 	});
 
 	return (
-		<>
-			<h1>This is the REGISTER page</h1>
-		</>
+		<Container>
+			<RegisterForm />
+		</Container>
 	);
 };
 
