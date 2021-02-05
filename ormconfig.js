@@ -44,6 +44,12 @@ const prodConfig = {
 		migrationsDir: 'dist/migration',
 		subscribersDir: 'dist/subscriber',
 	},
+	ssl: true,
+	extra: {
+		ssl: {
+			rejectUnauthorized: false,
+		},
+	},
 };
 
 const ormconfig = [devConfig, stagingConfig, prodConfig];
