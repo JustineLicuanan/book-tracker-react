@@ -15,6 +15,7 @@ import { __PROD__ } from './constants';
 		NODE_ENV = 'development',
 		PORT = '4000',
 		SESSION_SECRET = 'aslkdfjoiq12312',
+		CLIENT_URI = 'http://localhost:3000',
 	} = process.env;
 	const app = express();
 
@@ -59,14 +60,11 @@ import { __PROD__ } from './constants';
 	});
 
 	const corsOptions = {
-		origin: 'http://localhost:3000',
+		origin: CLIENT_URI,
 		credentials: true,
 	};
 
-	apolloServer.applyMiddleware({
-		app,
-		cors: !__PROD__ ? corsOptions : false,
-	});
+	apolloServer.applyMiddleware({ app, cors: corsOptions });
 	app.listen(PORT, () => {
 		console.log(`Server started at http://localhost:${PORT}/graphql`);
 	});
