@@ -3,14 +3,7 @@ import {
 	deleteBookSchema,
 	updateBookSchema,
 } from '@book-tracker/shared';
-import {
-	Arg,
-	Ctx,
-	Mutation,
-	Query,
-	Resolver,
-	UseMiddleware,
-} from 'type-graphql';
+import { Arg, Ctx, Mutation, Resolver, UseMiddleware } from 'type-graphql';
 
 import { isAuth } from '../middlewares/isAuth';
 import { Book } from '../entity/Book';
@@ -35,13 +28,6 @@ export class BookResolver {
 
 		(req.session as any).user = user;
 		return { book };
-	}
-
-	@Query(() => [Book])
-	@UseMiddleware(isAuth)
-	async getAllBooks(@Ctx() { req }: MyContext): Promise<Book[]> {
-		const { books } = (req.session as any).user as User;
-		return books;
 	}
 
 	@Mutation(() => ResolverTypes.DeleteBookObject)

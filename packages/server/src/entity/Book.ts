@@ -15,6 +15,9 @@ export class Book extends ExtendedBaseEntity {
 	@Field()
 	completed: boolean = false;
 
+	@Column('uuid', { nullable: true })
+	userId: string;
+
 	@ManyToOne(() => User, (user) => user.books)
 	user: User;
 }
