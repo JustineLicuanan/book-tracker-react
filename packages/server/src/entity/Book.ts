@@ -1,4 +1,4 @@
-import { Entity, Column, ManyToOne } from 'typeorm';
+import { Entity, Column, ManyToOne, BeforeInsert } from 'typeorm';
 import { Field, ObjectType } from 'type-graphql';
 
 import { ExtendedBaseEntity } from './Base';
@@ -20,4 +20,9 @@ export class Book extends ExtendedBaseEntity {
 
 	@ManyToOne(() => User, (user) => user.books)
 	user: User;
+
+	@BeforeInsert()
+	trimStrings() {
+		this.title = this.title.trim();
+	}
 }

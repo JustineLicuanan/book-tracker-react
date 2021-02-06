@@ -30,6 +30,23 @@ const stagingConfig = {
 	},
 };
 
+const testConfig = {
+	name: 'test',
+	type: 'better-sqlite3',
+	database: 'database.test.sqlite',
+	synchronize: true,
+	logging: true,
+	dropSchema: true,
+	entities: ['src/entity/**/*.ts'],
+	migrations: ['src/migration/**/*.ts'],
+	subscribers: ['src/subscriber/**/*.ts'],
+	cli: {
+		entitiesDir: 'src/entity',
+		migrationsDir: 'src/migration',
+		subscribersDir: 'src/subscriber',
+	},
+};
+
 const prodConfig = {
 	name: 'production',
 	type: 'postgres',
@@ -52,6 +69,6 @@ const prodConfig = {
 	},
 };
 
-const ormconfig = [devConfig, stagingConfig, prodConfig];
+const ormconfig = [devConfig, testConfig, stagingConfig, prodConfig];
 
 module.exports = ormconfig;
