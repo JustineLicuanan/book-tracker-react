@@ -101,8 +101,13 @@ const RegisterForm = () => {
 				<Formik
 					initialValues={{ email: '', password: '' }}
 					validationSchema={registerSchema}
-					onSubmit={async (values) => {
-						await registerMutation.mutateAsync(values);
+					onSubmit={async (values, { setErrors, setValues }) => {
+						const data = await registerMutation.mutateAsync(values);
+
+						if (data.errors) {
+							setValues({ email: values.email, password: '' }, false);
+							setErrors({ email: data.errors[0].message });
+						}
 					}}
 				>
 					{({

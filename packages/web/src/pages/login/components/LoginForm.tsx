@@ -101,8 +101,13 @@ const LoginForm = () => {
 				<Formik
 					initialValues={{ email: '', password: '' }}
 					validationSchema={loginSchema}
-					onSubmit={async (values) => {
-						await loginMutation.mutateAsync(values);
+					onSubmit={async (values, { setErrors, setValues }) => {
+						const data = await loginMutation.mutateAsync(values);
+
+						if (data.errors) {
+							setValues({ email: values.email, password: '' }, false);
+							setErrors({ email: data.errors[0].message });
+						}
 					}}
 				>
 					{({

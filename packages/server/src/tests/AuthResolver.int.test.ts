@@ -81,7 +81,7 @@ describe('Auth resolvers tests', () => {
 		expect(res).toEqual(mockRes);
 	});
 
-	it("User CAN'T login if email is incorrect", async () => {
+	it("User CAN'T login if email, or password is incorrect", async () => {
 		const loginMutation = gql`
 			mutation($email: String!, $password: String!) {
 				login(input: { email: $email, password: $password }) {
@@ -102,15 +102,12 @@ describe('Auth resolvers tests', () => {
 			}
 		`;
 
-		const loginVariables = {
+		const { login: wrongEmailRes } = await client.request<{
+			login: LoginObject;
+		}>(loginMutation, {
 			email: wrongLoginVariables.email,
 			password: registerVariables.password,
-		};
-
-		const { login: res } = await client.request<{ login: LoginObject }>(
-			loginMutation,
-			loginVariables
-		);
+		});
 
 		const mockRes = {
 			user: null,
@@ -122,51 +119,16 @@ describe('Auth resolvers tests', () => {
 			],
 		};
 
-		expect(res).toEqual(mockRes);
-	});
+		expect(wrongEmailRes).toEqual(mockRes);
 
-	it("User CAN'T login if password is incorrect", async () => {
-		const loginMutation = gql`
-			mutation($email: String!, $password: String!) {
-				login(input: { email: $email, password: $password }) {
-					user {
-						email
-						books {
-							id
-							title
-							completed
-						}
-					}
-
-					errors {
-						path
-						message
-					}
-				}
-			}
-		`;
-
-		const loginVariables = {
+		const { login: wrongPassRes } = await client.request<{
+			login: LoginObject;
+		}>(loginMutation, {
 			email: registerVariables.email,
 			password: wrongLoginVariables.password,
-		};
+		});
 
-		const { login: res } = await client.request<{ login: LoginObject }>(
-			loginMutation,
-			loginVariables
-		);
-
-		const mockRes = {
-			user: null,
-			errors: [
-				{
-					path: 'email',
-					message: 'email or password is incorrect',
-				},
-			],
-		};
-
-		expect(res).toEqual(mockRes);
+		expect(wrongPassRes).toEqual(mockRes);
 	});
 
 	it('User can login if credentials are correct', async () => {

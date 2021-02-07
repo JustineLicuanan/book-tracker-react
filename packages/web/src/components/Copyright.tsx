@@ -6,7 +6,7 @@ import { myMeta } from '../meta';
 
 const Copyright = () => {
 	return (
-		<Box mt={8} mb={6}>
+		<Box mt={8} mb={2}>
 			<Typography variant='body2' color='textSecondary' align='center'>
 				{'Made w/ ❤️ by '}
 				<MuiLink
